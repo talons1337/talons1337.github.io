@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Nod3rator's things</title>
+		<style>
+/*@import url(http://fonts.googleapis.com/css?family=Lato:700,700italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic);*/
+/*@font-face {
+	font-family: 'LinBiolinum_R';
+	src: url('fonts/LinBiolinum_R.eot');
+	src: url('fonts/LinBiolinum_R.woff') format('woff'), url('fonts/LinBiolinum_R.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}*/
+@font-face {
+	font-family: 'LinLibertine_R';
+	src: url('fonts/LinLibertine_R.eot');
+	src: url('fonts/LinLibertine_R.woff') format('woff'), url('fonts/LinLibertine_R.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*{
+	box-sizing:border-box;
+}
+body{
+	font-family:"LinLibertine_R","Palatino",serif;
+	background-color:#FFFFFF;
+}
+h1,h2,h3,h4,h5,h6,#randtitle{
+	letter-spacing:-2px;
+}
+#randtitle{
+	font-weight:700;
+	font-size:50px;
+	text-align:center;
+}
+#randsub:before,#randsub:after{
+	content:'"';
+}
+#randsub{
+	font-style:italic;
+	text-align:center;
+	color:#666666;
+}
+.genericcode{
+	letter-spacing:initial;
+	border-radius:3px;
+	font-family:"Courier",monospace;
+	padding-left:3px;
+	padding-right:3px;
+	color:#FF77A0;
+	border:1px solid #BBBBBB;
+}
+#projects{
+	background:#F0F0F0;
+	padding:10px;
+	/*margin-left:30px;
+	margin-right:30px;*/
+	margin:0 auto;
+	max-width:530px;
+	box-shadow:0 0 5px rgba(0,0,0,0.3) inset;
+	overflow:hidden;
+}
+.project{
+	float:left;
+	background:#FFFFFF;
+	width:150px;
+	height:150px;
+	font-size:40px;
+	padding:10px;
+	margin:10px;
+	color:inherit;
+	text-decoration:inherit;
+	display:inline-block;
+	text-align:center;
+	box-shadow:0 0 5px rgba(0,0,0,0.3);
+}
+.project:hover:not(.not-available){
+	transition:box-shadow 0.5s;
+	box-shadow:0 0 5px rgba(00,150,255,1);
+}
+.not-available{
+	opacity:0.5;
+}
+.desc{
+	display:block;
+	font-size:12px;
+}
+.projname{
+	display:block;
+	line-height:35px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.innerproj{
+}
+		</style>
+		<script>
+var randTitleArr = [
+"This is a website!",
+"Welcome... To my lair!",
+"Brb doing HTML stuff!"
+];
+var randSubArr = [
+"Polyhexatetradodecahedron.",
+"Arr!",
+"COPYRIGHT COPYRIGHT COPYRIGHT.",
+"Did somebody say... Protest?",
+"Because it's not as if you weren't already dead from these terrible, terrible jokes!",
+"I'm sorry, would you mind repeating yourself? I could've sworn you just said 'capitalism'.",
+"Open the door, get on the <span class='genericcode'>Math.floor</span>, everybody do the dinosaur.",
+"That's actually a peninsula!",
+"It's pronounced jif. jif. <u>jiiiiiiiiif</u>. jif, with a guh.",
+"You should totes use SCSS.",
+"Thanks, Abbott.",
+"It's easy to criticise. Fun too.",
+"Egg phobia is a thing.",
+"I forgot a semicolon, all hope is lost.",
+"You get one extra hour in the ball pit!",
+"Czechoslovakia before you wreck your slovakia.",
+"[Hoenn intensifies]",
+"Glory to Arstotzka"
+];
+
+var randomTitle = Math.floor(Math.random()*randTitleArr.length);
+var randomSub = Math.floor(Math.random()*randSubArr.length);
+
+window.onload = function() {
+	doTitle(randomTitle,randomSub,true);
+};
+
+function doTitle(ar1,ar2,log){
+	document.getElementById("randtitle").innerHTML = randTitleArr[ar1];
+	document.getElementById("randsub").innerHTML = randSubArr[ar2];
+	if(log){
+		console.log(ar1+" "+ar2);
+	}
+}
+		</script>
+	</head>
+	<body>
+		<div id="randtitle">Hello!</div>
+		<div id="randsub">This page is still loading, please be patient.</div>
+		<p>Hello! I'm nod3rator (sometimes Teh_Sauce_Guy or talons1337). Here's some of the stuff I've done, or that I'm working on:</p>
+		<div id="projects">
+			<a class="project" href="pcm">
+				<div class="innerproj">
+					<span class="projname">PCM II</span>
+					<span class="desc">Pokémon Card Maker II. Almost finished.</span>
+				</div>
+			</a>
+			<a class="project" href="mftml">
+				<div class="innerproj">
+					<span class="projname">MFTML</span>
+					<span class="desc">Mars for the Motherland. Undergoing development.</span>
+				</div>
+			</a>
+			<a class="project" href="replacer">
+				<div class="innerproj">
+					<span class="projname">Replace text</span>
+					<span class="desc">Simple tool to replace one word with another in a block of text.</span>
+				</div>
+			</a>
+		</div>
+		<!--ul>
+			<li><a href="pcm2/">Pokémon Card Maker II</a>.</li>
+			<li><a href="http://i.imgur.com/zW4wBdt.png">Gypsy Quest <sup>(Shahilvilishashion Shiksh — Gypshy Quesht)</sup></a>. [COMING SOON]</li>
+			<li>A silly little country management game. [COMING SOON]</li>
+			<li><a href="replacer">Replace text</a></li>
+			<li><a href="mftml">MFTML</a> [IN DEVELOPMENT]</li>
+		</ul-->
+	</body>
+</html>

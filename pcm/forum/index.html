@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Forum | Pokémon Card Maker II</title>
+        <link rel="stylesheet" href="../public/stylesheets/main.css" />
+		<link rel="icon" type="image/png" href="../public/media/icon.png" />
+		<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+ga('create', 'UA-52744828-1', 'auto');
+ga('send', 'pageview');
+ 
+		</script>
+	</head>
+	<body style="text-align:center;">
+		<sub>Current path: <b>/forum</b> Other pages: /support | <a href="../credits/">/credits</a> | <a href="../">index</a></sub><br/><br/>
+		<script>
+window.onload=function uglyWorkaround(){
+var stuff=window.innerHeight-150
+document.getElementById("forum").innerHTML = '<iframe style="padding:0;margin:0 auto;" width="95%" height="'+stuff+'px" scrolling="auto" src="http://pcm2.createmybb3.com/">';
+}
+		</script>
+		<div id="forum">
+				If the forum is not visible, then your browser is too old, or the page took to long to load. Direct forum URL: http://pcm2.createmybb3.com/.
+			</iframe>
+		</div>
+		<div class="legal">
+			<hr/>
+			<span class="copyleft" title="Copyleft">©</span> 2012-2015 Pok&#233;mon Card Maker II. Pok&#233;mon Card Maker II is not affiliated with Nintendo, GameFreak, or any of its affiliates. Pokémon is <span class="copyright">©</span> 1996-2015 Pokémon/Nintendo. Graphics used in Pokémon Card Maker II are the property of their respective owners and may not be used or redistributed without their permission.<br/>
+		</div>
+		<div id="chatContainer" style="position:fixed;top:20px;right:20px;text-align:right;max-width:15%;background-color:#FEFEFE;border-radius:6px;padding:10px;max-height:700px;z-index:10;">
+			<button onClick="javascript:openChat();">Open Chatbox</button>
+		</div>
+		<script>
+function openChat(){
+    document.getElementById("chatContainer").innerHTML = '<button onClick="javascript:closeChat();">Close Chatbox</button><div id="chatBox"><iframe src="http://pcm2cb.chatango.com" style="min-height:400px;max-height:600px;width:100%;"></iframe></div>';
+}
+function closeChat(){
+    document.getElementById("chatContainer").innerHTML = '<button onClick="javascript:openChat();">Open Chatbox</button>';
+}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Replace text</title>
+		<meta charset="UTF-8"/>
+		<style>
+html,body,#container,.text,#termsbox{
+	box-sizing:border-box;
+}
+html,body{
+	padding:0;
+	margin:0;
+	width:100%;
+	height:100%;
+}
+body{
+	padding-top:3%;
+}
+#container{
+	margin:0 auto;
+	width:94%;
+	height:95%;
+	background:#F5F5F5;
+	padding:5px;
+}
+.text{
+	border:1px solid #CCC;
+	background:#FFF;
+	width:49.7%;
+	min-width:49.7%;
+	max-width:49.7%;
+	height:80%;
+	min-height:80%;
+	max-height:80%;
+	padding:5px;
+	margin:0;
+	font-family:"Courier New",monospace;
+	color:#CCC!important;
+	transition:border 0.3s, box-shadow 0.3s,color 0.3s;
+}
+.text:hover,.text:active,.text:focus,#termsbox input:hover,#termsbox input:active,#termsbox input:focus{
+	border:1px solid #0CF;
+	box-shadow:0 0 10px -4px #0CF;
+	color:#000!important;
+}
+#in{
+	float:left;
+}
+#out{
+	float:right;
+	color:#000!important;
+	overflow-y:scroll;
+}
+.place{
+	color:#DDD;
+}
+#termsbox{
+	padding:5px;
+	font-family:"Courier New",monospace;
+	height:19%;
+	width:100%;
+	background:#FFF;
+	margin-bottom:0.5%;
+	border:1px solid #CCC;
+	overflow-y:scroll;
+}
+#termsbox input{
+	border:1px solid #CCC;
+	padding:5px;
+	transition:border 0.3s, box-shadow 0.3s,color 0.3s;
+}
+input{
+	font-family:"Courier New",monospace;
+}
+		</style>
+		<script>
+function replace(input){
+	var inY = document.getElementById("inX");
+	var outY = document.getElementById("outX");
+	var regex = new RegExp(inY.value,"g");
+	document.getElementById("out").innerHTML = input.replace(/\n/g,"<br/>").replace(regex,outY.value);
+}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="termsbox">
+				This will replace every single instance of the entered term with a new term. Eg. Replace [hello] with [goodbye]. will replace every instance of hello with goodbye.
+				<div>Replace <input id="inX"/> with <input id="outX"/>.</div>
+				Text not being replaced? Check for any spaces, and if there aren't any, try force updating<br/>
+				<button onclick="javascript:replace(document.getElementById('in').value);">Force Update</button>
+			</div>
+			<textarea id="in" class="text" placeholder="Input..." onchange="javascript:replace(this.value);"></textarea>
+			<div id="out" class="text"><span class="place">Output...</span></div>
+		</div>
+	</body>
+</html>

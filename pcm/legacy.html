@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta name="description" content="Pokemon Card Maker 2 (PCM2) : Create your own custom Pok&#233;mon cards. " />
+        <meta name="keywords" content="Pokemon, Card, Maker, Pokemon Card Maker, TCG, PCM, pokemoncardmaker.org, pokemoncardmaker, Generator, Pokemon Card Generator, Nintendo">
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Pokemon Card Maker 2</title>
+        <!--[if IE]><script type="text/javascript" src="public/frameworks/excanvas.js"></script><![endif]-->
+        <link rel="stylesheet" href="public/stylesheets/legacy.css" />
+		<link rel="icon" type="image/png" href="public/media/icon.png" />
+        <script type="text/javascript" src="public/scripts/html2canvas.js"></script>
+        <script>
+function imgAdd(){
+	var URL = prompt("Please enter the link to an image that you don't want stretched", "http://");
+	var imageC=document.getElementById("imagecanvas"); 
+	var ctx=imageC.getContext("2d"); 
+	var img = new Image(); 
+	img.src = URL; 
+	img.onload = function(){ 
+		ctx.drawImage(img,30,60); 
+	}
+}
+function imgAddStretch(){
+	var stretchURL = prompt("Please enter the link to an image that you do want stretched", "http://");
+	var imageAC=document.getElementById("imagecanvas"); 
+	var ctx=imageAC.getContext("2d"); 
+	var img = new Image(); 
+	img.src = stretchURL;
+	img.onload = function(){ 
+		ctx.drawImage(img,30,60,360,235); 
+	}
+}//http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png
+/*function getBase64Image(img){
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    // Firefox supports PNG and JPEG. You could check img.src to
+    // guess the original format, but be aware the using "image/jpg"
+    // will re-encode the image.
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}*/
+function imgChange(imgURL){ 
+	var mainC=document.getElementById("maincanvas"); 
+	var ctx=mainC.getContext("2d"); 
+	mainC.width = mainC.width;
+	var img = new Image(); 
+	img.src = "public/media/aschefield/"+imgURL; 
+	img.onload = function(){ 
+	ctx.drawImage(img,0,0); 
+	}
+}
+function weakness(weakURL){ 
+	var weakC=document.getElementById("weakcanvas"); 
+	var ctx=weakC.getContext("2d"); 
+	weakC.width = weakC.width;
+	var weakimg = new Image(); 
+	weakimg.src = "public/media/icons/weak/"+weakURL; 
+	weakimg.onload = function(){ 
+	ctx.drawImage(weakimg,0,0); 
+	}
+}
+function resistance(strongURL){ 
+	var strongC=document.getElementById("strongcanvas"); 
+	var ctx=strongC.getContext("2d"); 
+	strongC.width = strongC.width;
+	var strongimg = new Image(); 
+	strongimg.src = "public/media/icons/strong/"+strongURL; 
+	strongimg.onload = function(){ 
+	ctx.drawImage(strongimg,0,0); 
+	}
+}
+function retreat(retreatCost){ 
+	var runC=document.getElementById("runcanvas"); 
+	var ctx=runC.getContext("2d"); 
+	runC.width = runC.width;
+	var runimg = new Image(); 
+	runimg.src = "public/media/icons/retreat/"+retreatCost; 
+	runimg.onload = function(){ 
+	ctx.drawImage(runimg,0,0); 
+	}
+}
+function clearCanvas(getCanvas){
+	var clearCanvas = document.getElementById(getCanvas);
+	clearCanvas.width = clearCanvas.width;
+}
+function pokeName(){
+	var nameC = document.getElementById("namecanvas");
+	var ctx=nameC.getContext("2d");
+	nameC.width = nameC.width;
+	var name = nameBox.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}	
+	ctx.font = "bold 22px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText(name, 33, 47);
+}
+function pokeEvolve(){
+	var evolveC = document.getElementById("evolvecanvas");
+	var ctx=evolveC.getContext("2d");
+	evolveC.width = evolveC.width;
+	var evolve = evolveBox.value;
+	ctx.fillStyle = "#000000";	
+	ctx.font = "italic 10px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText("Evolves from "+evolve, 138, 72);
+}
+function pokeWeakness(){
+	var pokeWeakC = document.getElementById("weaktextcanvas");
+	var ctx=pokeWeakC.getContext("2d");
+	pokeWeakC.width = pokeWeakC.width;
+	var weakText = weakTextBox.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}	
+	ctx.font = "bold 18px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText(weakText, 90, 552);
+}
+function pokeStrongness(){
+	var pokeStrongC = document.getElementById("strongtextcanvas");
+	var ctx=pokeStrongC.getContext("2d");
+	pokeStrongC.width = pokeStrongC.width;
+	var strongText = strongTextBox.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}	
+	ctx.font = "bold 18px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText(strongText, 220, 553);
+}
+function pokeHp(){
+	var hpC = document.getElementById("hpcanvas");
+	var ctx=hpC.getContext("2d");
+	hpC.width = hpC.width;
+	var hp = hpBox.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}
+	ctx.font = "bold 22px sans-serif";
+	ctx.textAlign = "right";
+	ctx.fillText(hp, 363, 47);
+}
+function pokeSpecs(){
+	var specsC = document.getElementById("specscanvas");
+	var ctx=specsC.getContext("2d");
+	specsC.width = specsC.width;
+	var specs = specsBox.value;
+	ctx.font = "normal 11px sans-serif";
+	ctx.textAlign = "center";
+	ctx.fillText(specs, 210, 306);
+}
+function pokeArt(){
+	var artC = document.getElementById("artcanvas");
+	var ctx=artC.getContext("2d");
+	artC.width = artC.width;
+	var art = artBox.value;
+	ctx.fillStyle = "#000000";
+	ctx.font = "italic 11px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText("Illus. "+art, 202, 521);
+}
+function pokeFooter1(){
+	var footer1C = document.getElementById("footercanvas1");
+	var ctx=footer1C.getContext("2d");
+	footer1C.width = footer1C.width;
+	var footer1 = footer1Box.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}
+	ctx.font = "italic 11px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText(footer1, 37, 485);
+}
+function pokeFooter2(){
+	var footer2C = document.getElementById("footercanvas2");
+	var ctx=footer2C.getContext("2d");
+	footer2C.width = footer2C.width;
+	var footer2 = footer2Box.value;
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}
+	ctx.font = "italic 11px sans-serif";
+	ctx.textAlign = "left";
+	ctx.fillText(footer2, 37, 497);
+}
+function pokeHpInit(){
+	var hpIC = document.getElementById("initcanvas");
+	initcanvas.height = initcanvas.height;
+	var ctx=hpIC.getContext("2d");
+	if(document.getElementById('dark1').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark2').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else if(document.getElementById('dark3').checked){
+		ctx.fillStyle = "#FFFFFF";
+	}else{
+		ctx.fillStyle = "#000000";	
+	}
+	ctx.font = "bold 11px sans-serif";
+	ctx.textAlign = "right";
+	ctx.fillText("HP", 325, 47);
+}
+function save(){
+	html2canvas(document.getElementById("canvascontainer"), {
+		onrendered: function(canvas) {
+			doc=document.body.appendChild(canvas);
+		},
+		width:1000,
+		height:1000,
+		background:undefined,
+		allowTaint:true,
+		useCORS:true
+	});
+	var dataURL = base64.toDataURL("image/png");
+	document.getElementById("out").innerHTML="<img src='"+dataURL+"'/>"
+}
+		</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52744828-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	</head>
+	<body onload="javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName();">
+        <noscript>
+        	<div class="quote">
+            	<h1>Javascript must be enabled</h1>
+                <p>Sorry, but it appears that javascript on your browser isn't enabled. To be able to use the &lt;canvas&gt; element (which runs the card maker) properly, a browser needs to have javascript enabled. </p>
+            </div>
+        </noscript>
+		<sub>Full Release R2 | Current path: <b>index</b>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<script src="public/scripts/legacydate.js"></script>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;Other pages: /support | <a href="forum/">/forum</a> | <a href="credits/">/credits</a></sub>
+		<div class="quote"><div id="canvascontainer">
+		<canvas onload="javascript:pokeHpInit()" id="initcanvas" width="420" height="589"></canvas>
+		<canvas id="footercanvas1" width="420" height="589"></canvas>
+		<canvas id="footercanvas2" width="420" height="589"></canvas>
+		<canvas id="specscanvas" width="420" height="589"></canvas>
+		<canvas id="artcanvas" width="420" height="589"></canvas>
+		<canvas id="hpcanvas" width="420" height="589"></canvas>
+		<canvas id="namecanvas" width="420" height="589"></canvas>
+		<canvas id="imagecanvas" width="420" height="589"></canvas>
+        <canvas id="weakcanvas" width="420" height="589"></canvas>
+        <canvas id="strongcanvas" width="420" height="589"></canvas>
+        <canvas id="runcanvas" width="420" height="589"></canvas>
+        <canvas id="weaktextcanvas" width="420" height="589"></canvas>
+        <canvas id="strongtextcanvas" width="420" height="589"></canvas>
+        <canvas id="evolvecanvas" width="420" height="589"></canvas>
+		<canvas id="maincanvas" width="420" height="589"></canvas>
+        <div id="filler">
+        	<div id="attackcanvas">
+                <span id="energy1"><span id="a1e1"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a1e2"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a1e3"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a1e4"></span> <span id="a1e5"></span></span>
+                <span id="attack1name"></span><span id="attack1damage"></span>
+                <p id="attack1canvas"></p>
+                <span id="energy2"><span id="a2e1"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a2e2"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a2e3"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a2e4"></span> <span id="a2e5"></span></span>
+                <span id="attack2name"></span><span id="attack2damage"></span>
+                <p id="attack2canvas"></p>
+              	<span id="energy3"><span id="a3e1"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a3e2"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a3e3"><img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/none.png"/></span> <span id="a3e4"></span> <span id="a3e5"></span></span>
+                <span id="attack3name"></span><span id="attack3damage"></span>
+                <p id="attack3canvas"></p>
+        	</div>
+        </div>
+        </div>
+        <div id="infocontainer">
+        <p><b>Instructions:</b> Type whatever you want to have as your Pok&#233;mon's name, HP, so on and so forth, then hit "enter" with the text box still selected. When you are finished, hit save</p>
+        <table>
+        	<tr>
+            	<td>Name:</td> 
+            	<td><input class="input" id="nameBox" maxlength="25" value="Pokémon Name" onChange="javascript:pokeName()"/></td>
+            	<td>HP:</td> 
+                <td><input class="input" id="hpBox" maxlength="3" value="130" onChange="javascript:pokeHp()"/></td>
+            </tr>
+            <tr>
+            	<td>Evolves from:</td>
+                <td><input class="input" id="evolveBox" onChange="javascript:pokeEvolve()"/></td>
+                <td><button type="button" onClick="javascript:clearCanvas('evolvecanvas')">Unevolve</button></td>
+            </tr>
+            <tr>
+            	<td>Specs:</td>
+                <td><input class="input" id="specsBox" maxlength="58" value="NO #000 Species Pokémon HT: 0'00'' WT: 0.00 lbs" onChange="javascript:pokeSpecs()"/></td>
+			</tr>
+            <tr>
+            	<td>Footer (Line 1):</td>
+                <td><input class="input" id="footer1Box" maxlength="75" value="The description of the Pokémon" onChange="javascript:pokeFooter1()"/></td>
+			</tr>
+            <tr>
+            	<td>Footer (Line 2):</td>
+                <td><input class="input" id="footer2Box" maxlength="75" value="The description of the Pokémon, part two" onChange="javascript:pokeFooter2()"/></td>
+			</tr>
+		</table>
+        <hr/>
+        <div style="background:#9999EE;margin:4px;color:#FFFFFF;"><button type="button" onClick="javascript:save();">Save</button> THIS FEATURE IS HIGHLY UNFINISHED, UNLESS YOU ARE AN APPROVED TESTER, JUST TAKE DIRECT SCREENSHOTS. Scroll down to view your saved card. Currently, images are not saved, if you wish to save with images, you will have to send a private message to an administrator on the forum. You will also need to crop the empty areas of the images. </div>
+        <hr/>
+        <script>
+//First attackset
+function a1e1(url){
+	document.getElementById('a1e1').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a1e2(url){
+	document.getElementById('a1e2').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a1e3(url){
+	document.getElementById('a1e3').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a1e4(url){
+	document.getElementById('a1e4').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a1e5(url){
+	document.getElementById('a1e5').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+
+function atk1body(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack1canvas').innerHTML = '<font color="#FFFFFF">'+attack1Box.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack1canvas').innerHTML = '<font color="#FFFFFF">'+attack1Box.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack1canvas').innerHTML = '<font color="#FFFFFF">'+attack1Box.value+'</font>';
+	}else{
+		document.getElementById('attack1canvas').innerHTML = attack1Box.value;
+	}
+}
+function atk1damage(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack1damage').innerHTML = '<font color="#FFFFFF">'+attack1damageBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack1damage').innerHTML = '<font color="#FFFFFF">'+attack1damageBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack1damage').innerHTML = '<font color="#FFFFFF">'+attack1damageBox.value+'</font>';
+	}else{
+		document.getElementById('attack1damage').innerHTML = attack1damageBox.value;
+	}	
+}
+function atk1name(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack1name').innerHTML = '<font color="#FFFFFF">'+attack1nameBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack1name').innerHTML = '<font color="#FFFFFF">'+attack1nameBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack1name').innerHTML = '<font color="#FFFFFF">'+attack1nameBox.value+'</font>';
+	}else{
+		document.getElementById('attack1name').innerHTML = attack1nameBox.value;
+	}	
+}
+
+//Second attackset
+function a2e1(url){
+	document.getElementById('a2e1').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a2e2(url){
+	document.getElementById('a2e2').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a2e3(url){
+	document.getElementById('a2e3').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a2e4(url){
+	document.getElementById('a2e4').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a2e5(url){
+	document.getElementById('a2e5').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+
+function atk2body(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack2canvas').innerHTML = '<font color="#FFFFFF">'+attack2Box.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack2canvas').innerHTML = '<font color="#FFFFFF">'+attack2Box.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack2canvas').innerHTML = '<font color="#FFFFFF">'+attack2Box.value+'</font>';
+	}else{
+		document.getElementById('attack2canvas').innerHTML = attack2Box.value;
+	}
+}
+function atk2damage(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack2damage').innerHTML = '<font color="#FFFFFF">'+attack2damageBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack2damage').innerHTML = '<font color="#FFFFFF">'+attack2damageBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack2damage').innerHTML = '<font color="#FFFFFF">'+attack2damageBox.value+'</font>';
+	}else{
+		document.getElementById('attack2damage').innerHTML = attack2damageBox.value;
+	}	
+}
+function atk2name(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack2name').innerHTML = '<font color="#FFFFFF">'+attack2nameBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack2name').innerHTML = '<font color="#FFFFFF">'+attack2nameBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack2name').innerHTML = '<font color="#FFFFFF">'+attack2nameBox.value+'</font>';
+	}else{
+		document.getElementById('attack2name').innerHTML = attack2nameBox.value;
+	}	
+}
+
+//Third attackset
+function a3e1(url){
+	document.getElementById('a3e1').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a3e2(url){
+	document.getElementById('a3e2').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a3e3(url){
+	document.getElementById('a3e3').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a3e4(url){
+	document.getElementById('a3e4').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+function a3e5(url){
+	document.getElementById('a3e5').innerHTML = '<img alt="Dont mind this its just here for backend purposes"  src="public/media/icons/'+url+'"/>'
+}
+
+function atk3body(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack3canvas').innerHTML = '<font color="#FFFFFF">'+attack3Box.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack3canvas').innerHTML = '<font color="#FFFFFF">'+attack3Box.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack3canvas').innerHTML = '<font color="#FFFFFF">'+attack3Box.value+'</font>';
+	}else{
+		document.getElementById('attack3canvas').innerHTML = attack3Box.value;
+	}
+}
+function atk3damage(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack3damage').innerHTML = '<font color="#FFFFFF">'+attack3damageBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack3damage').innerHTML = '<font color="#FFFFFF">'+attack3damageBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack3damage').innerHTML = '<font color="#FFFFFF">'+attack3damageBox.value+'</font>';
+	}else{
+		document.getElementById('attack3damage').innerHTML = attack3damageBox.value;
+	}	
+}
+function atk3name(){
+	if(document.getElementById('dark1').checked){
+		document.getElementById('attack3name').innerHTML = '<font color="#FFFFFF">'+attack3nameBox.value+'</font>';	
+	}else if(document.getElementById('dark2').checked){
+		document.getElementById('attack3name').innerHTML = '<font color="#FFFFFF">'+attack3nameBox.value+'</font>';
+	}else if(document.getElementById('dark3').checked){
+		document.getElementById('attack3name').innerHTML = '<font color="#FFFFFF">'+attack3nameBox.value+'</font>';
+	}else{
+		document.getElementById('attack3name').innerHTML = attack3nameBox.value;
+	}	
+}
+		</script>
+        Attack energy cost:
+        <select onchange="javascript:a1e1(this.value)">
+        	<option value="none.png" onClick="javascript:a1e1('none.png');">None</option>
+            <option value="free.png" onClick="javascript:a1e1('free.png');">Free Attack</option>
+            <option value="colourless.png" onClick="javascript:a1e1('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a1e1('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a1e1('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a1e1('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a1e1('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a1e1('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a1e1('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a1e1('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a1e1('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a1e2(this.value)">
+        	<option value="none.png" onClick="javascript:a1e2('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a1e2('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a1e2('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a1e2('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a1e2('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a1e2('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a1e2('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a1e2('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a1e2('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a1e2('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a1e3(this.value)">
+        	<option value="none.png" onClick="javascript:a1e3('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a1e3('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a1e3('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a1e3('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a1e3('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a1e3('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a1e3('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a1e3('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a1e3('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a1e3('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a1e4(this.value)">
+        	<option value="none.png" onClick="javascript:a1e4('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a1e4('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a1e4('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a1e4('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a1e4('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a1e4('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a1e4('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a1e4('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a1e4('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a1e4('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a1e5(this.value)">
+        	<option value="none.png" onClick="javascript:a1e5('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a1e5('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a1e5('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a1e5('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a1e5('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a1e5('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a1e5('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a1e5('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a1e5('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a1e5('water.png');">Water</option>
+        </select>
+        <table>
+            <tr>
+            	<td>Attack Name:</td>
+                <td><input class="input" id="attack1nameBox" maxlength="25" value="Attack Name" onChange="javascript:atk1name();"/> <input id="attack1damageBox" maxlength="5" onChange="javascript:atk1damage();"/></td>
+            </tr>
+            <tr>
+            	<td>Attack Description:</td>
+                <td><textarea rows="7" cols="60" onChange="javascript:atk1body();" id="attack1Box"></textarea></td>
+            </tr>
+        </table>
+        <hr/>
+        Attack energy cost:
+        <select onchange="javascript:a2e1(this.value)">
+        	<option value="none.png" onClick="javascript:a2e1('none.png');">None</option>
+            <option value="free.png" onClick="javascript:a2e1('free.png');">Free Attack</option>
+            <option value="colourless.png" onClick="javascript:a2e1('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a2e1('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a2e1('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a2e1('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a2e1('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a2e1('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a2e1('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a2e1('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a2e1('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a2e2(this.value)">
+        	<option value="none.png" onClick="javascript:a2e2('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a2e2('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a2e2('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a2e2('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a2e2('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a2e2('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a2e2('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a2e2('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a2e2('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a2e2('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a2e3(this.value)">
+        	<option value="none.png" onClick="javascript:a2e3('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a2e3('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a2e3('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a2e3('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a2e3('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a2e3('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a2e3('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a2e3('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a2e3('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a2e3('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a2e4(this.value)">
+        	<option value="none.png" onClick="javascript:a2e4('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a2e4('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a2e4('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a2e4('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a2e4('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a2e4('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a2e4('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a2e4('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a2e4('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a2e4('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a2e5(this.value)">
+        	<option value="none.png" onClick="javascript:a2e5('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a2e5('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a2e5('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a2e5('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a2e5('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a2e5('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a2e5('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a2e5('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a2e5('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a2e5('water.png');">Water</option>
+        </select>
+        <table>
+            <tr>
+            	<td>Attack Name:</td>
+                <td><input class="input" id="attack2nameBox" maxlength="25" value="Attack Name" onChange="javascript:atk2name();"/> <input id="attack2damageBox" maxlength="5" onChange="javascript:atk2damage();"/></td>
+            </tr>
+            <tr>
+            	<td>Attack Description:</td>
+                <td><textarea rows="7" cols="60" onChange="javascript:atk2body();" id="attack2Box"></textarea></td>
+            </tr>
+        </table>
+        <hr/>
+        Attack energy cost:
+        <select onchange="javascript:a3e1(this.value)">
+        	<option value="none.png" onClick="javascript:a3e1('none.png');">None</option>
+            <option value="free.png" onClick="javascript:a3e1('free.png');">Free Attack</option>
+            <option value="colourless.png" onClick="javascript:a3e1('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a3e1('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a3e1('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a3e1('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a3e1('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a3e1('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a3e1('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a3e1('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a3e1('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a3e2(this.value)">
+        	<option value="none.png" onClick="javascript:a3e2('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a3e2('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a3e2('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a3e2('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a3e2('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a3e2('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a3e2('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a3e2('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a3e2('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a3e2('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a3e3(this.value)">
+        	<option value="none.png" onClick="javascript:a3e3('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a3e3('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a3e3('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a3e3('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a3e3('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a3e3('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a3e3('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a3e3('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a3e3('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a3e3('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a3e4(this.value)">
+        	<option value="none.png" onClick="javascript:a3e4('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a3e4('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a3e4('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a3e4('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a3e4('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a3e4('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a3e4('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a3e4('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a3e4('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a3e4('water.png');">Water</option>
+        </select>
+        <select onchange="javascript:a3e5(this.value)">
+        	<option value="none.png" onClick="javascript:a3e5('none.png');">None</option>
+            <option value="colourless.png" onClick="javascript:a3e5('colourless.png');">Colourless</option>
+            <option value="dark.png" onClick="javascript:a3e5('dark.png');">Dark</option>
+            <option value="fighting.png" onClick="javascript:a3e5('fighting.png');">Fighting</option>
+            <option value="fire.png" onClick="javascript:a3e5('fire.png');">Fire</option>
+            <option value="grass.png" onClick="javascript:a3e5('grass.png');">Grass</option>
+            <option value="lightning.png" onClick="javascript:a3e5('lightning.png');">Lightning</option>
+            <option value="metal.png" onClick="javascript:a3e5('metal.png');">Metal</option>
+            <option value="psychic.png" onClick="javascript:a3e5('psychic.png');">Psychic</option>
+            <option value="water.png" onClick="javascript:a3e5('water.png');">Water</option>
+        </select>
+     	<table>
+            <tr>
+            	<td>Attack:</td>
+                <td><input class="input" id="attack3nameBox" maxlength="25" value="Attack Name" onChange="javascript:atk3name();"/> <input id="attack3damageBox" maxlength="5" onChange="javascript:atk3damage();"/></td>
+            </tr>
+            <tr>
+            	<td>Attack Description:</td>
+                <td><textarea rows="7" cols="60" onChange="javascript:atk3body();" id="attack3Box"></textarea></td>
+            </tr>
+        </table>
+        <hr/>
+        <table>
+        	<tr>
+            	<td>Illustrator:</td>
+                <td><input class="input" id="artBox" maxlength="40" onChange="javascript:pokeArt()"/></td>
+            </tr>
+		</table>
+        <b>Weakness, Resistance &amp; Retreat Cost:</b><br/>
+        Weakness:<br/>[
+        <input type="radio" name="weakness" onChange="javascript:weakness('');"/> None ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('colourless.png');"/> Colourless ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('dark.png');"/> Dark ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('fighting.png');"/> Fighting ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('fire.png');"/> Fire ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('grass.png');"/> Grass ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('lightning.png');"/> Lightning ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('metal.png');"/> Metal ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('psychic.png');"/> Psychic ] [
+        <input type="radio" name="weakness" onChange="javascript:weakness('water.png');"/> Water ] <input id="weakTextBox" maxlength="10" onChange="javascript:pokeWeakness()"/><br/>
+        Resistance:<br/>[
+        <input type="radio" name="resistance" onChange="javascript:resistance('');"/> None ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('colourless.png');"/> Colourless ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('dark.png');"/> Dark ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('fighting.png');"/> Fighting ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('fire.png');"/> Fire ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('grass.png');"/> Grass ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('lightning.png');"/> Lightning ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('metal.png');"/> Metal ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('psychic.png');"/> Psychic ] [
+        <input type="radio" name="resistance" onChange="javascript:resistance('water.png');"/> Water ] <input id="strongTextBox" maxlength="10" onChange="javascript:pokeStrongness()"/><br/>
+		Retreat Cost:<br/>[
+        <input type="radio" name="retreat" onChange="javascript:retreat('');"/> 0 ] [
+        <input type="radio" name="retreat" onChange="javascript:retreat('1.png');"/> 1 ] [
+        <input type="radio" name="retreat" onChange="javascript:retreat('2.png');"/> 2 ] [
+        <input type="radio" name="retreat" onChange="javascript:retreat('3.png');"/> 3 ] [
+        <input type="radio" name="retreat" onChange="javascript:retreat('4.png');"/> 4 ]
+        <hr/>
+        <p><b>Instructions:</b> Check the round buttons to change what type and/or stage your Pok&#233;mon is.</p><button type="button" onClick="javascript:clearCanvas('maincanvas')">Remove Blank</button><br/>[
+		<input type="radio" name="blank" onChange="javascript:imgChange('colourless/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Colourless ] [
+		<input type="radio" name="blank" id="dark1" onChange="javascript:imgChange('dark/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Dark ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fighting/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Fighting ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fire/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Fire ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('grass/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Grass ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('lightning/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Lightning ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('metal/basic.png'); "/> Basic Metal ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('psychic/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Psychic ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('water/basic.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Basic Water ] <br/><br/>[
+		<input type="radio" name="blank" onChange="javascript:imgChange('colourless/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Colourless ] [
+		<input type="radio" name="blank" id="dark2" onChange="javascript:imgChange('dark/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Dark ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fighting/s1.png'); "/> Stage 1 Fighting ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fire/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Fire ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('grass/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Grass ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('lightning/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Lightning ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('metal/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Metal ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('psychic/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Psychic ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('water/s1.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 1 Water ] <br/><br/>[
+		<input type="radio" name="blank" onChange="javascript:imgChange('colourless/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Colourless ] [
+		<input type="radio" name="blank" id="dark3" onChange="javascript:imgChange('dark/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Dark ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fighting/s2.png'); "/> Stage 2 Fighting ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('fire/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Fire ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('grass/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Grass ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('lightning/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Lightning ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('metal/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Metal ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('psychic/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Psychic ] [
+		<input type="radio" name="blank" onChange="javascript:imgChange('water/s2.png'); javascript:pokeHpInit(); javascript:pokeHp(); javascript:pokeFooter1(); javascript:pokeFooter2(); javascript:pokeName(); javascript:pokeWeakness(); javascript:pokeStrongness(); javascript:atk1body(); javascript:atk2body(); javascript:atk3body(); javascript:atk1damage(); javascript:atk2damage(); javascript:atk3damage(); javascript:atk1name(); javascript:atk2name(); javascript:atk3name();"/> Stage 2 Water ]
+        <hr/>
+        <button type="button" onClick="javascript:imgAdd()">Add image</button><button type="button" onClick="javascript:imgAddStretch()">Add image (stretch to fit box)</button><button type="button" onClick="javascript:clearCanvas('imagecanvas')">Remove all images</button><br/>
+        </div></div>
+        <h3>Pok&#233;mon Card Maker</h3>
+        <p><b>Update News:</b> Pok&#233;mon Card Maker revision 2 IS OUT! Revision 3 will include Poke-Powers, Poke-Bodies, Evolution Images, and possibly different blanks</p><br/>
+        <canvas id="backup" style="border:2px solid #CCCCCC;margin:0 auto;width:50%;min-width 200px;height:200px;"><b>Wuh oh</b><p>It appears as though your browser doesn't support the HTML5 &lt;canvas&gt; element. In order for the card maker to work, you will probably need to update your browser</p></canvas>
+                <table id="versions"><caption>Pok&#233;moncardmaker browser support:</caption>
+                <thead><tr><th>Internet Explorer</th><th>Mozilla Firefox</th><th>Safari</th><th>Google Chrome</th><th>Opera</th></tr></thead>
+                <tbody><tr><td>7.0+<sup>Limited support</sup>, 9.0+</td><td>3.0+</td><td>3.0+</td><td>(3.0+)<sup>Chrome auto-updates</sup></td><td>10.0+</td></tbody>
+                </table>
+		<hr/>
+        <div id="chatContainer" style="position:fixed;top:20px;right:20px;text-align:right;max-width:15%;background-color:#FEFEFE;border-radius:6px;padding:10px;max-height:700px;">
+            <button onClick="javascript:openChat();">Open Chatbox</button>
+        </div>
+        <script>
+function openChat(){
+    document.getElementById("chatContainer").innerHTML = '<button onClick="javascript:closeChat();">Close Chatbox</button><div><iframe id="chatBox" src="http://pcm2cb.chatango.com" style="min-height:400px;max-height:600px;width:100%;"></iframe></div>';
+}
+function closeChat(){
+    document.getElementById("chatContainer").innerHTML = '<button onClick="javascript:openChat();">Open Chatbox</button>';
+}
+function changeChannel(){
+    var channel = channelBox.value;
+    document.getElementById("chatBox").src = 'http://'+channel+'.chatango.com';
+}
+        </script>
+                 The official chat channel is pcm2cb <br/>
+                <input id="channelBox"/><button onClick="javascript:changeChannel()">Change Chat Channel</button><br/>
+		<sub>
+			2013-2014 Pok&#233;mon Card Maker. Pok&#233;mon Card Maker is not affiliated with Nintendo, GameFreak, or any of its affiliates. <br/>
+		</sub>
+	</body>
+</html>

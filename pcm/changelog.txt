@@ -1,0 +1,58 @@
+Changelog for Pokemon Card Maker II
+
+v1.3.4 (March 13, 2015)
+
+*Small fix to card artwork
+*Fixed spacing in retreat cost
+*Made weakness/resistance font smaller
+*Made weakness/resistance text white on dark blanks
+
+v1.3.3 (March 11, 2015)
+
+*Fixed bug that made dark blanks not able to have less than 5 energies without reverting to black, unreadable text
+*Fixed bug that caused fighting type to appear first when changing attack, when it should have been dark
+*Shifted retreat cost 1 pixel to the left
+*Changed opacity of free attacks
+*Small adjustment to the small "HP" next to the Pokemon's HP
+
+v1.3.2 (March 11, 2015)
+
++Added retreat cost
+*Attacks should now line up
+
+v1.3.1 (March 9, 2015)
+
++Added weakness and resistance
+*Fixed missing water type in attack energy cost
+*Small changes to CSS and layout of website
+*Updated a lot of old code on other parts of the site
+
+v1.3.0 (March 8, 2015)
+
++Added attack names
++Added attack types
++Added attack descriptions
+
+2R1 [v1.2.0] (November 7, 2014)
+
+*Removed vast majority of archaic and outdated PCM code
+*Changed name from "Pokemon Card Maker 2" to "Pokemon Card Maker II" (with an accented e), and fixed some titles
+*Pokemon evolution and specs can now be disabled
+*Disabled spellcheck
++Added correct fonts
++Added efficient way to change colours of text when changing blanks
++Added contenteditable Pokemon Name, HP, specs, footer, illus box, etc. 
++Finally added a little "HP" next to the Pokemon's HP that is aligned properly. It only took me, what, 3 years? No time at all!
++Added levels
++Added image properties, including offset, height and width, and rotation
++Added evolution icon
+-Removed canvas compatibility checker
+-Removed card saver
+
+1R2 [v1.1.1] (July 9, 2014)
+
++Added card saver
+
+Ancient history [Alpha 1.0 - Beta 1.6] (2011 - 2014)
+
++Added everything
