@@ -80,29 +80,13 @@ function imgChange(imgURL){
 	if (document.getElementById("d1").checked == true || document.getElementById("d2").checked == true || document.getElementById("d3").checked == true){
 		fixDark("darkblank");
 	}
-	/*else if (document.getElementById("d2").checked == true){
-		fixDark("darkblank");
-	}
-	else if (document.getElementById("d3").checked == true){
-		fixDark("darkblank");
-	}*/
 	else{
 		fixDark("lightblank");
 	}
 }
 
 function fixDark(classSet){
-	var elements = [
-	"name",
-	"lv",
-	"health",
-	"atkcontinner",
-	"wrbox"
-	]
-	for (var i = 0, j = elements.length; i < j; i++){
-		document.getElementById(elements[i]).setAttribute("class",classSet);
-		document.getElementById("canvascontainer").setAttribute("class",classSet);
-	}
+	document.getElementById("canvascontainer").setAttribute("class",classSet);
 }
 
 var typeIndex = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //sometimes I disgust myself
@@ -277,8 +261,8 @@ function energyAlignment(atkal){
 				</table>
         		<hr/>
         		<b>Show/hide card elements:</b><br/>
-        		<input type="checkbox" onchange="javascript:toggleShow(this,'evopic','Toggling evolution...','hide','show');javascript:toggleShow(this,'evolvesfrom','','hide','show');"/>Disable evolution
-        		<input type="checkbox" onchange="javascript:toggleShow(this,'footer','Toggling footer...','hide','show');javascript:toggleShow(this,'footline','Toggling footer...','hide','show');javascript:expandAtk(this)"/>Disable footer<br/>
+        		<input type="checkbox" onchange="javascript:toggleShow(this,'evopic','Toggling evolution','hide','show');javascript:toggleShow(this,'evolvesfrom','','hide','show');"/>Disable evolution
+        		<input type="checkbox" onchange="javascript:toggleShow(this,'footer','Toggling footer','hide','show');javascript:toggleShow(this,'footline','Toggling footer...','hide','show');javascript:expandAtk(this)"/>Disable footer<br/>
         		<input type="checkbox" onchange="javascript:toggleShow(this,'atk1','Toggling attack 1','hide','show');"/>Disable attack 1
         		<input type="checkbox" onchange="javascript:toggleShow(this,'atk2','Toggling attack 2','hide','show');"/>Disable attack 2
         		<input type="checkbox" onchange="javascript:toggleShow(this,'atk3','Toggling attack 3','hide','show');"/>Disable attack 3

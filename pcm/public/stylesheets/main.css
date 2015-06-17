@@ -10,23 +10,6 @@ html{
 	-webkit-font-smoothing:subpixel-antialiased;
 }
 
-/*ContentEditable*/
-
-/*
-*[contenteditable=true]{
-	font-style:italic;
-}
-*[contenteditable=true]:hover{
-	border-style:dotted;
-	border-width:1px;
-	border-color:#555555;
-	-webkit-box-sizing:border-box;
-	   -moz-box-sizing:border-box;
-		-ms-box-sizing:border-box;
-		 -o-box-sizing:border-box;
-			box-sizing:border-box;
-}*/
-
 /* VERY IMPORTANT DO NOT DELETE */
 
 #cardtype{
@@ -194,18 +177,16 @@ html{
 	opacity:1;
 	border-radius:50%;
 }
-#canvascontainer.darkblank #footer{
-	color:#FFFFFF;
-}
-#canvascontainer.lightblank #footer{
+.lightblank{
 	color:#000000;
 }
-.darkblank:not(#canvascontainer){
-	color:#FFFFFF;
+.darkblank{
+	color:#EEEEEE;
 }
-.lightblank:not(#canvascontainer){
+#illus,#specs,#evolvesfrom{
 	color:#000000;
 }
+
 #atkcont{
 	top:334px;
 	left:44px;
@@ -214,7 +195,17 @@ html{
 	overflow:hidden;
 	/*border:1px solid #FF0000;*/
 }
+#atkcont.align3 .atktype{
+	width:69px;
+}
+#atkcont.align4 .atktype{
+	width:92px;
+}
+#atkcont.align5 .atktype{
+	width:115px;
+}
 .atkname{
+	/*border:1px solid #FF0000;*/
 	font-family:"PCM-GSC-B";
 	font-size:24px;
 	vertical-align:top;
@@ -230,7 +221,9 @@ html{
 			transform:scale(0.89,1);
 }
 .atktype{
-	vertical-align:top;
+	position:relative;
+	top:1px;
+	/*border:1px solid #FF0000;*/
 	padding-right:6px;
 	display:inline-block;
 	width:115px;
@@ -240,17 +233,12 @@ html{
 .atktype > img{
 	height:20px;
 	width:20px;
-	padding-left:3px;
+	margin-left:3px;
 	display:inline;
 }
-#atkcont.align3 .atktype{
-	width:69px;
-}
-#atkcont.align4 .atktype{
-	width:92px;
-}
-#atkcont.align5 .atktype{
-	width:115px;
+.atkhead{
+	margin-bottom:-5px;
+	position:relative;
 }
 .atkdmg{
 	float:right;
@@ -272,10 +260,6 @@ html{
 		 -o-transform:scale(0.88,1);
 			transform:scale(0.88,1);
 }
-.atkhead{
-	margin-bottom:-5px;
-	position:relative;
-}
 .atkdesc{
 	margin-bottom:7px;
 	font-family:"PCM-GS";
@@ -293,8 +277,10 @@ html{
 		-ms-transform:scale(1,1.14);
 		 -o-transform:scale(1,1.14);
 			transform:scale(1,1.14);
-	
+	position:relative;
 }
+
+
 .wrrc{
 	top:552px;
 	font-family:"PCM-FUB";
@@ -333,7 +319,7 @@ html{
 	width:100px;
 	text-align:center;
 }
-#wrbox.darkblank span{
+.darkblank #wrbox span{
 	text-shadow:0 0 3px #000000,0 0 3px #000000;
 }
 .show{
@@ -521,7 +507,7 @@ noscript{
 	padding:3%;
 	left:-0%;
 	position:absolute;
-	z-index:10; 
+	z-index:10000; 
 	height:99%; 
 	width:94%;	
 	background:#FFFFFF;
@@ -559,21 +545,6 @@ abbr{
 
 /*Formatting colours*/
 
-.admin{
-	color:#CC0000;
-}
-.jsPink{
-	color:#FF6699;
-}
-.jsBlue,.htmlBlue{
-	color:#0000FF;
-}
-.jsGrey,.htmlGrey{
-	color:#999999;
-}
-.htmlRed{
-	color:#800000;
-}
 .small{
 	width:50px;
 	margin:1px;
